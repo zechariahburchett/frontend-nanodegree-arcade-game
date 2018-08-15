@@ -1,8 +1,7 @@
-//variable to keep score
-let score = 0;
-
 //player lives
 let lives = 3;
+
+let score = 0;
 
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
@@ -26,6 +25,7 @@ Enemy.prototype.update = function(dt) {
     else {
       //reset enemy
       this.x = -100;
+      this.speed = Math.floor(Math.random() * 225 + 150);
     }
 };
 
@@ -59,21 +59,22 @@ class Player{
       if (this.y === enemy.y && this.x > enemy.x && this.x < enemy.x + 25){
       this.reset();
       lives--;
-      console.log(lives);
-      if (lives === -1){
-        console.log('You Lose!')
+      //console.log(lives);
+      if (lives === 0){
+        alert('You Lose!')
         lives = 3;
       }
       }
       //if player makes it to river add point
       if (this.y === -15){
         score++;
-        console.log(score);
+        //console.log(score);
         this.reset();
         //win condition
         if (score === 10){
-          console.log('You Win!');
+          alert('You Win!');
           score = 0;
+          lives = 3;
         }
       }
   }
@@ -113,11 +114,12 @@ class Player{
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+// x = 2, y = 10
 const player = new Player();
-const enemy1 = new Enemy(-100, 60, 300);
-const enemy2 = new Enemy(-100, 145, 275);
-const enemy3 = new Enemy(-250, 225, 200);
-const enemy4 = new Enemy(-250, 145, 215);
+const enemy1 = new Enemy(-100, 65, Math.floor(Math.random() * 299 + 150));
+const enemy2 = new Enemy(-100, 145, Math.floor(Math.random() * 299 + 150));
+const enemy3 = new Enemy(-250, 225, Math.floor(Math.random() * 299 + 150));
+const enemy4 = new Enemy(-250, 145, Math.floor(Math.random() * 299 + 150));
 let allEnemies = [];
 allEnemies.push(enemy1, enemy2, enemy3, enemy4);
 
