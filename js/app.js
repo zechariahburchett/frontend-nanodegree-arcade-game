@@ -1,3 +1,9 @@
+//variable to keep score
+let score = 0;
+
+//player lives
+let lives = 3;
+
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
@@ -52,6 +58,23 @@ class Player{
       //if player collided take life away
       if (this.y === enemy.y && this.x > enemy.x && this.x < enemy.x + 25){
       this.reset();
+      lives--;
+      console.log(lives);
+      if (lives === -1){
+        console.log('You Lose!')
+        lives = 3;
+      }
+      }
+      //if player makes it to river add point
+      if (this.y === -15){
+        score++;
+        console.log(score);
+        this.reset();
+        //win condition
+        if (score === 10){
+          console.log('You Win!');
+          score = 0;
+        }
       }
   }
 }
@@ -102,10 +125,14 @@ allEnemies.push(enemy1, enemy2, enemy3, enemy4);
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down'
+        37: 'left', //left arrow
+        65: 'left', //a
+        38: 'up', //up arrow
+        87: 'up', //w
+        39: 'right', //right arrow
+        68: 'right', //d
+        40: 'down', //down arrow
+        83: 'down' //s
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
